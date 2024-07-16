@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  meudbPost:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: conexao_docker
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    ports:
+      - "5432:5432"
+    networks:
+      - minha-rede
+networks:
+  minha-rede:
+    driver: bridge

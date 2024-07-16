@@ -1,0 +1,10 @@
+com\projeto\apiProdutosCategoricos\models\Produto.class
+com\projeto\apiProdutosCategoricos\ApiProdutosCategoricosApplication.class
+com\projeto\apiProdutosCategoricos\controlers\ProdutoController.class
+com\projeto\apiProdutosCategoricos\repositories\CategoriaRepository.class
+com\projeto\apiProdutosCategoricos\repositories\ProdutoRepository.class
+com\projeto\apiProdutosCategoricos\services\CategoriaService.class
+com\projeto\apiProdutosCategoricos\controlers\CategoriaController.class
+com\projeto\apiProdutosCategoricos\controlers\Hello.class
+com\projeto\apiProdutosCategoricos\services\ProdutoService.class
+com\projeto\apiProdutosCategoricos\models\Categoria.class
