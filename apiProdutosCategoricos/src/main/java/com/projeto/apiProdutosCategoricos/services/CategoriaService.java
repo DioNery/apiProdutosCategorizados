@@ -7,6 +7,7 @@ import com.projeto.apiProdutosCategoricos.models.Categoria;
 import com.projeto.apiProdutosCategoricos.repositories.CategoriaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -15,11 +16,28 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     public List<Categoria> listarTodas() {
-        return categoriaRepository.findAll();
+        List<Categoria> categorias = categoriaRepository.findAll();
+        categorias.forEach(categoria -> categoria.getProdutos().size()); 
+        return categorias;
     }
 
     public Categoria buscarPorId(Long id) {
-        return categoriaRepository.findById(id).orElse(null);
+        Optional<Categoria> optionalCategoria = categoriaRepository.findById(id);
+        if (optionalCategoria.isPresent()) {
+            Categoria categoria = optionalCategoria.get();
+            categoria.getProdutos().size(); // Força o carregamento dos produtos
+            return categoria;
+        }
+        return null;
+    }
+    public Categoria buscarPorNome(String nome) {
+        Optional<Categoria> optionalCategoria = categoriaRepository.findByNome(nome);
+        if (optionalCategoria.isPresent()) {
+            Categoria categoria = optionalCategoria.get();
+            categoria.getProdutos().size(); // Força o carregamento dos produtos
+            return categoria;
+        }
+        return null;
     }
 
     public Categoria salvar(Categoria categoria) {
@@ -30,4 +48,3 @@ public class CategoriaService {
         categoriaRepository.deleteById(id);
     }
 }
-

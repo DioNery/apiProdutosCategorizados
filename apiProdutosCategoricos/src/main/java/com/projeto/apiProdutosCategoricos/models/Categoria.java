@@ -1,10 +1,8 @@
 package com.projeto.apiProdutosCategoricos.models;
 
 import jakarta.persistence.*;
-
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Categoria {
@@ -14,8 +12,9 @@ public class Categoria {
     private Long id;
 
     private String nome;
-    @JsonIgnore
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Produto> produtos;
 
     public Long getId() {

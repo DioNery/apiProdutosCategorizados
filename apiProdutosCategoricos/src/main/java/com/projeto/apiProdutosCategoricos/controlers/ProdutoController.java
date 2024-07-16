@@ -3,10 +3,8 @@ package com.projeto.apiProdutosCategoricos.controlers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.projeto.apiProdutosCategoricos.models.Produto;
 import com.projeto.apiProdutosCategoricos.services.ProdutoService;
-
 import java.util.List;
 
 @RestController
@@ -15,12 +13,12 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
-
+    
     @GetMapping
     public List<Produto> listarTodos() {
         return produtoService.listarTodos();
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
         Produto produto = produtoService.buscarPorId(id);
@@ -29,12 +27,25 @@ public class ProdutoController {
         }
         return ResponseEntity.notFound().build();
     }
-
-    @PostMapping
-    public Produto salvar(@RequestBody Produto produto) {
-        return produtoService.salvar(produto);
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<Produto> buscarPorNome(@PathVariable String nome) {
+        Produto produto = produtoService.buscarPorNome(nome);
+        if (produto != null) {
+            return ResponseEntity.ok(produto);
+        }
+        return ResponseEntity.notFound().build();
     }
-
+    
+    @PostMapping
+    public ResponseEntity<?> salvar(@RequestBody Produto produto) {
+        Produto produtoSalvo = produtoService.salvar(produto);
+        if (produtoSalvo != null) {
+            return ResponseEntity.ok(produtoSalvo);
+        } else {
+            return ResponseEntity.badRequest().body("A categoria do produto não pode ser nula.");
+        }
+    }
+    
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
         Produto produtoExistente = produtoService.buscarPorId(id);
@@ -44,7 +55,7 @@ public class ProdutoController {
         }
         return ResponseEntity.notFound().build();
     }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         Produto produtoExistente = produtoService.buscarPorId(id);
@@ -55,4 +66,3 @@ public class ProdutoController {
         return ResponseEntity.notFound().build();
     }
 }
-

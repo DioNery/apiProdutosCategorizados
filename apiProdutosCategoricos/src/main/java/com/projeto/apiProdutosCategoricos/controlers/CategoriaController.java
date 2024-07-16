@@ -3,11 +3,10 @@ package com.projeto.apiProdutosCategoricos.controlers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.projeto.apiProdutosCategoricos.models.Categoria;
 import com.projeto.apiProdutosCategoricos.services.CategoriaService;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/categorias")
@@ -29,6 +28,15 @@ public class CategoriaController {
         }
         return ResponseEntity.notFound().build();
     }
+     @GetMapping("/nome/{nome}")
+    public ResponseEntity<Categoria> buscarPorNome(@PathVariable String nome) {
+        Categoria categoria = categoriaService.buscarPorNome(nome);
+        if (categoria != null) {
+            return ResponseEntity.ok(categoria);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
 
     @PostMapping
     public Categoria salvar(@RequestBody Categoria categoria) {
