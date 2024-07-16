@@ -25,7 +25,7 @@ public class CategoriaService {
         Optional<Categoria> optionalCategoria = categoriaRepository.findById(id);
         if (optionalCategoria.isPresent()) {
             Categoria categoria = optionalCategoria.get();
-            categoria.getProdutos().size(); // Força o carregamento dos produtos
+            categoria.getProdutos().size();
             return categoria;
         }
         return null;
@@ -34,7 +34,7 @@ public class CategoriaService {
         Optional<Categoria> optionalCategoria = categoriaRepository.findByNome(nome);
         if (optionalCategoria.isPresent()) {
             Categoria categoria = optionalCategoria.get();
-            categoria.getProdutos().size(); // Força o carregamento dos produtos
+            categoria.getProdutos().size();
             return categoria;
         }
         return null;

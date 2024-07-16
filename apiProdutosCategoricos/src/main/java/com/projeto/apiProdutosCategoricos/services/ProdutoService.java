@@ -35,7 +35,6 @@ public class ProdutoService {
     }
 
     public Produto salvar(Produto produto) {
-        // Verifica se a categoria associada ao produto existe no banco de dados
         if (produto.getCategoria() != null && produto.getCategoria().getId() != null) {
             Long categoriaId = produto.getCategoria().getId();
             if (!categoriaRepository.existsById(categoriaId)) {
